@@ -1,11 +1,11 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/2TmiRqwI)
 # final-project-skeleton
 
-    * Team Name: 
-    * Team Members: 
-    * Github Repository URL: 
+    * Team Name: Skylens
+    * Team Members: Jason Ventura, Eric Zou
+    * Github Repository URL: https://github.com/ese3500/final-project-skylens
     * Github Pages Website URL: [for final submission]
-    * Description of hardware: (embedded hardware, laptop, etc) 
+    * Description of hardware: Laptop (For now)
 
 ## Final Project Proposal
 
@@ -64,7 +64,7 @@ This section is to help guide your progress over the next few weeks. Feel free t
 
 ### 12. Proposal Presentation
 
-Add your slides to the Final Project Proposal slide deck in the Google Drive.
+[Add your slides to the Final Project Proposal slide deck in the Google Drive.](https://docs.google.com/presentation/d/1-Z5W7xg-WeICQvAZcTpaSmDrNKGdcdJ_jiM9-PyDwvM/edit?usp=sharing)
 
 ## Final Project Report
 
