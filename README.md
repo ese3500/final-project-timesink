@@ -11,7 +11,7 @@
 
 ### 1. Abstract
 
-In a few sentences, describe your final project. This abstract will be used as the description in the evaluation survey forms.
+Our final project is SkyLens, an automated drone camera. It does not require an operator, and the user can select various modes to take pictures or videos of themselves and their surroundings. We believe the product can be the best of both worlds between selfie sticks and drones, especially well suited to tourism, streaming/vlogging, and atheltics, where convenience is a key consideration in filming equipment.
 
 ### 2. Motivation
 
@@ -19,7 +19,10 @@ What is the problem that you are trying to solve? Why is this project interestin
 
 ### 3. Goals
 
-These are to help guide and direct your progress.
+1. Achieve autonomous control of drone with software
+2. Stream camera input to IOT device
+3. Attach camera and sensors to drone
+4. Enable flight from hand and back
 
 ### 4. Software Requirements Specification (SRS)
 
