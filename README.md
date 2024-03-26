@@ -11,11 +11,17 @@
 
 ### 1. Abstract
 
-Our final project is SkyLens, an automated drone camera. It does not require an operator, and the user can select various modes to take pictures or videos of themselves and their surroundings. We believe the product can be the best of both worlds between selfie sticks and drones, especially well suited to tourism, streaming/vlogging, and atheltics, where convenience is a key consideration in filming equipment.
+Our final project is SkyLens, an automated drone camera. The user can select various modes to take pictures or videos of themselves and their surroundings from novel angles without needing to control the drone themselves. 
 
 ### 2. Motivation
 
-What is the problem that you are trying to solve? Why is this project interesting? What is the intended purpose?
+We believe the product can be the best of both worlds between selfie sticks and drones, especially well suited to tourism, streaming/vlogging, and atheltics, where convenience is a key consideration in filming equipment.
+
+Regular selfie sticks require someone to hold them, which gives an inherent limitation to the types of shots that can be taken with a selfie stick. Additionally, the selfie stick will need to be removed from the picture either with a camera adjustment that can decrease image quality or editing afterwards.
+
+Drone photos can avoid this issue, but they are much more difficult to take. An operator is required, oftentimes separate from the user if they are in the photo. They also require some degree of familiarity with drones, else the user risks crashing them and losing both the drone and the camera.
+
+We aim to make an autonomous drone that offers similar functionality to a selfie stick without the inherent limits, while avoiding some of the technical expertise required to successfully perate a drone.
 
 ### 3. Goals
 
@@ -26,32 +32,54 @@ What is the problem that you are trying to solve? Why is this project interestin
 
 ### 4. Software Requirements Specification (SRS)
 
-Formulate key software requirements here.
+- Mode selection shall be possible through IOT Device
+- Software shall enable sending and receiving photos through IOT Device
+- Software shall be able to instruct the drone to ascend 1m and move forward 1m, take a picture, and return to same location
+- Software shall be able to instruct the drone to ascend 1m and move forward 1m, then circle around origin to take a video for 5 seconds, then return to original position
+- Software shall be able to instruct the drone to ascend above the user and face a specified direction, take a video in focus for 5 seconds, and return to original position
 
 ### 5. Hardware Requirements Specification (HRS)
 
-Formulate key hardware requirements here.
+- Drone shall have 4 ultrasonic sensors to measure distance to obstacles at maximum distance of 20 cm
+- Drone shall have shall ESC capability for quad-rotor drone with PWM
+- Drone shall have small camera connected to ESP32 camera module attached
+- Drone shall have WiFi board to send photos to IOT device
+- Drone shall have pressure sensor to deactivate flight when hand is detected
+- Drone shall have button to begin photo capture sequence
+- Project shall be based on ATMega328PB Microcontroller
+- Project should use Raspberry Pi for camera data processing
 
 ### 6. MVP Demo
 
-What do you expect to accomplish by the first milestone?
+We hope to have a drone that can perform the basic action of lifting off, moving to a higher position that is further away, taking a photo, and returning to the same location and hovering to await a deactivation response from the user (grabbing the drone).
 
 ### 7. Final Demo
 
-What do you expect to achieve by the final demonstration or after milestone 1?
+We want to have the various video modes completed (Zoom, Circle). We also want to create touch sensors for stopping the drone when it returns to the hand. 
 
 ### 8. Methodology
 
-What is your approach to the problem?
+We'd like to teardown the control system of a 3rd party drone to send control inputs through this device from a microcontroller, which would also have a WiFi board to send signals. On the drone, we would mount a camera system with a WiFi controller for broadcasting messages to an IOT device, and an IMU and ultrasonic sensors for control purposes.
 
 ### 9. Components
 
-What major components do you need and why?
+- Drone
+- ATMega328PB
+- Possibly Raspberry Pi
+- Camera
+- Gimbal
+- Camera Board
+- Pressure Sensor
+- WiFi Board
+- Batteries
+- IMU
 
 ### 10. Evaluation
 
-What is your metric for evaluating how well your product/solution solves the problem? Think critically on this section. Having a boolean metric such as “it works” is not very useful. This is akin to making a speaker and if it emits sound, albeit however terrible and ear wrenching, declare this a success.
-It is recommended that your project be something that you can take pride in. Oftentimes in interviews, you will be asked to talk about projects you have worked on.
+- Drone shall be functional after 10 repeated runs
+- Drone shall capture photos
+- Drone shall not impact any obstacles in any scenario
+- Drone shall send captured photos to IOT device
 
 ### 11. Timeline
 
@@ -59,11 +87,15 @@ This section is to help guide your progress over the next few weeks. Feel free t
 
 | **Week**            | **Task** | **Assigned To**    |
 |----------           |--------- |------------------- |
-| Week 1: 3/24 - 3/31 |          |                    |
-| Week 2: 4/1 - 4/7   |          |                    |
-| Week 3: 4/8 - 4/14  |          |                    |
-| Week 4: 4/15 - 4/21 |          |                    |
-| Week 5: 4/22 - 4/26 |          |                    |
+| Week 1: 3/24 - 3/31 |  Block Diagram      | Jason |
+| Week 1: 3/24 - 3/31 |  Select and Order Parts      |   Eric |
+| Week 2: 4/1 - 4/7   |    Teardown Drone/Controller, Control Planning      |          Jason          |
+| Week 2: 4/1 - 4/7   |    Camera and Drone Control Software Start   |          Eric          |
+| Week 3: 4/8 - 4/14  |    Drone Attachment/Assembly      |            Jason/Eric        |
+| Week 4: 4/15 - 4/21 |     Video Mode     |         Eric           |
+| Week 4: 4/15 - 4/21 |     Ultrasonic Sensor Integration     |         Jason           |
+| Week 5: 4/22 - 4/26 |     Quality Testing/Bug Fixing     |        Eric/Jason            |
+| Week 5: 4/22 - 4/26 |     Touch Sensor Assembly     |        Eric/Jason            |
 
 ### 12. Proposal Presentation
 
