@@ -84,20 +84,22 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 ### 10. Evaluation
 
 #### Dispensers
-- Dispensers detect hand positions correctly (within activation range or not)
-- Dispensers actuate motors when stimulus is detected and do not otherwise
+- Dispensers detect hand positions correctly (within activation range or not) at least 9 times in 10 trials (stimulus)
+- Dispensers actuate motors when stimulus is detected and do not otherwise with 100% success rate
 
 #### Display
-- Display maintains a real-time synced with external clock or user-set
-- Display gathers weather information from 3rd party IOT device and displays it
+- Display maintains a real-time synced with external clock or user-set (within 10s of set/real time)
+- Display gathers weather information from 3rd party IOT device and displays it (within 24 hours)
 
 #### Lights
-- UV light activates when button is pressed
-- Motion-activated light turns on in dark when individual moves within 7 feet
+- UV light activates when button is pressed (runs for approximately 3 minutes)
+- Motion-activated light turns on in dark when individual moves within 7 feet (9 in 10 success rate)
 
-#### Aesthetics/Ergonomics
+#### Aesthetics/Ergonomics/Reliability
 - Wall/plug charging
 - 4x4 inch base size
+- Multitasking capability
+- All processes should continue to occur over 100 trials of various tasks
 
 ### 11. Timeline
 
