@@ -1,7 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/2TmiRqwI)
 # final-project-skeleton
 
-    * Team Name: Skylens
+    * Team Name: TimeSink
     * Team Members: Jason Ventura, Eric Zou
     * Github Repository URL: https://github.com/ese3500/final-project-skylens
     * Github Pages Website URL: [for final submission]
@@ -11,95 +11,111 @@
 
 ### 1. Abstract
 
-Our final project is SkyLens, an automated drone camera. The user can select various modes to take pictures or videos of themselves and their surroundings from novel angles without needing to control the drone themselves. 
+Our final project is TimeSink, an all-in-one bathroom tool to handle organization of common items, reducing mess and clutter on valuable counter real estate while offering a variety of features.
 
 ### 2. Motivation
 
-We believe the product can be the best of both worlds between selfie sticks and drones, especially well suited to tourism, streaming/vlogging, and atheltics, where convenience is a key consideration in filming equipment.
+Bathroom counters can be subject to some of the most pressing space constraints out of any place in the home. It can often be a daunting challenge to iterate on and settle on an arrangement of various home products like toothbrushes, toothpaste, and soap that conserves space while maintaining convenience. Additionally, the sink itself does little in the way of active assistance to the user, with no built-in functionality like lights, clocks, or self-cleaning capabilities. All of these issues combined can often result in the perfect storm, conspiring against users to leave the bathroom sink counter disorganized, unclean, and cluttered. 
 
-Regular selfie sticks require someone to hold them, which gives an inherent limitation to the types of shots that can be taken with a selfie stick. Additionally, the selfie stick will need to be removed from the picture either with a camera adjustment that can decrease image quality or editing afterwards.
-
-Drone photos can avoid this issue, but they are much more difficult to take. An operator is required, oftentimes separate from the user if they are in the photo. They also require some degree of familiarity with drones, else the user risks crashing them and losing both the drone and the camera.
-
-We aim to make an autonomous drone that offers similar functionality to a selfie stick without the inherent limits, while avoiding some of the technical expertise required to successfully perate a drone.
+We believe that TimeSink can help people organize their bathroom sink counter like never before. We want to make it easy to store and access the 20% of items and tools that will be used 80% of the time in a bathroom setting, reducing cognitive load in critical times such as the morning rush or bedtime and helping users establish a rhythm for their routines.
 
 ### 3. Goals
 
-1. Achieve autonomous control of drone with software
-2. Stream camera input to IOT device
-3. Attach camera and sensors to drone
-4. Enable flight from hand and back
+1. Have digital display with current time and weather (IOT?)
+2. Have automatic dispensers for soap and toothpaste using ultrasonic sensors
+3. Have a motion-activated night light
+4. Have a UV light and moisture removal system for toothbrush holder
+5. 4x4 inch maximum base dimensions
+6. Wall-chargable
+7. Waterproof
 
 ### 4. Software Requirements Specification (SRS)
 
-- Mode selection shall be possible through IOT Device
-- Software shall enable sending and receiving photos through IOT Device
-- Software shall be able to instruct the drone to ascend 1m and move forward 1m, take a picture, and return to same location
-- Software shall be able to instruct the drone to ascend 1m and move forward 1m, then circle around origin to take a video for 5 seconds, then return to original position
-- Software shall be able to instruct the drone to ascend above the user and face a specified direction, take a video in focus for 5 seconds, and return to original position
+- Software shall be executed on the ATmega328PB microcontroller
+- Software source code shall be written in C
+- Software shall process ultrasonic sensor values to detect motion and proximity
+- Software shall maintain real-world time and weather, receiving updates via WiFi
+- Software shall trigger motors to dispense soap and toothpaste
+- Software shall trigger UV/night lights upon stimulus detection
+- Software shall handle user setting customization
+- Software should receive signals from ESP32 Feather Module representing weather data
 
 ### 5. Hardware Requirements Specification (HRS)
 
-- Drone shall have 4 ultrasonic sensors to measure distance to obstacles at maximum distance of 20 cm
-- Drone shall have shall ESC capability for quad-rotor drone with PWM
-- Drone shall have small camera connected to ESP32 camera module attached
-- Drone shall have WiFi board to send photos to IOT device
-- Drone shall have pressure sensor to deactivate flight when hand is detected
-- Drone shall have button to begin photo capture sequence
-- Project shall be based on ATMega328PB Microcontroller
-- Project should use Raspberry Pi for camera data processing
+- Project will contain a wall-based power supply that converts AC to DC, then steps down the voltage to within the operating range of each of the components using various converters
+- Project shall be contained within a 3D printed shell waterproofed by sealant
+- Project shall contain servo motors to dispense soap and toothpaste
+- Project shall contain ultrasonic sensors to detect proximity
+- Project shall contain IR sensor for motion detection
+- Project shall contain photoresistor that detects surrounding brightness
+- Project shall contain bright LED light that can light up room
+- Project shall contain LCD that is wired to the microcontroller
+- Project shall contain UV light for sterilizing toothbrushes
+- User customization shall be implemented with push buttons
+- Project shall be based on ATMega328PB microcontroller, with wire connections extending to each of the components
+- Microcontroller will be attached to ESP32 Feather Module utilizing SPI interface
 
 ### 6. MVP Demo
 
-We hope to have a drone that can perform the basic action of lifting off, moving to a higher position that is further away, taking a photo, and returning to the same location and hovering to await a deactivation response from the user (grabbing the drone).
+We hope to have the dispensers, basic LCD display software, and UV lights finished by the MVP.
 
 ### 7. Final Demo
 
-We want to have the various video modes completed (Zoom, Circle). We also want to create touch sensors for stopping the drone when it returns to the hand. 
+We want IOT for the weather, motion-activated night light, and full LCD display control finished after the MVP, with everything fitting in the housing with waterproofing applied.
 
 ### 8. Methodology
 
-We'd like to teardown the control system of a 3rd party drone to send control inputs through this device from a microcontroller, which would also have a WiFi board to send signals. On the drone, we would mount a camera system with a WiFi controller for broadcasting messages to an IOT device, and an IMU and ultrasonic sensors for control purposes.
+We would like to 3D print a frame and housing for each of the components. Ideally, each would have their own compartments/sections in the superstructure for easy assembly. However, each component would essentially be independent, consisting of its own sensor/actuator pair. For example, a dispenser is composed of an ultrasonic sensor to detect proximity of hand or toothbrush, and a motor-based actuator to dispense the required substance.
 
 ### 9. Components
 
-- Drone
-- ATMega328PB
-- Possibly Raspberry Pi
-- Camera
-- Gimbal
-- Camera Board
-- Pressure Sensor
-- WiFi Board
-- Batteries
-- IMU
+- ATmega328PB
+- UV Light
+- Motors (for dispensing)
+- Bright LED
+- LCD Screen
+- Base Structure (3D printed)
+- Sealant
+- ESP32 Feather WiFi Board
+- Ultrasonic Sensors
+- IR Sensor
+- Logic Level Shifter
 
 ### 10. Evaluation
 
-- Drone shall be functional after 10 repeated runs
-- Drone shall capture photos
-- Drone shall not impact any obstacles in any scenario
-- Drone shall send captured photos to IOT device
+#### Dispensers
+- Dispensers detect hand positions correctly (within activation range or not)
+- Dispensers actuate motors when stimulus is detected and do not otherwise
+
+#### Display
+- Display maintains a real-time synced with external clock or user-set
+- Display gathers weather information from 3rd party IOT device and displays it
+
+#### Lights
+- UV light activates when button is pressed
+- Motion-activated light turns on in dark when individual moves within 7 feet
+
+#### Aesthetics/Ergonomics
+- Wall/plug charging
+- 4x4 inch base size
 
 ### 11. Timeline
-
-This section is to help guide your progress over the next few weeks. Feel free to adjust and edit the table below to something that would be useful to you. Really think about what you want to accomplish by the first milestone.
 
 | **Week**            | **Task** | **Assigned To**    |
 |----------           |--------- |------------------- |
 | Week 1: 3/24 - 3/31 |  Block Diagram      | Jason |
 | Week 1: 3/24 - 3/31 |  Select and Order Parts      |   Eric |
-| Week 2: 4/1 - 4/7   |    Teardown Drone/Controller, Control Planning      |          Jason          |
-| Week 2: 4/1 - 4/7   |    Camera and Drone Control Software Start   |          Eric          |
-| Week 3: 4/8 - 4/14  |    Drone Attachment/Assembly      |            Jason/Eric        |
-| Week 4: 4/15 - 4/21 |     Video Mode     |         Eric           |
-| Week 4: 4/15 - 4/21 |     Ultrasonic Sensor Integration     |         Jason           |
+| Week 2: 4/1 - 4/7   |   Full 3D Schematic      |          Jason          |
+| Week 2: 4/1 - 4/7   |    Software Setup (Git/Microcontroller/etc)   |          Eric          |
+| Week 3: 4/8 - 4/14  |    Prototyping Parts with Microcontroller     |            Jason/Eric        |
+| Week 4: 4/15 - 4/21 |   Finalize  Software/Hardware Logic for Clock/Display/Lights    |         Eric           |
+| Week 4: 4/15 - 4/21 | Finalize   Software/Hardware Logic for Dispensers    |         Jason           |
 | Week 5: 4/22 - 4/26 |     Quality Testing/Bug Fixing     |        Eric/Jason            |
-| Week 5: 4/22 - 4/26 |     Touch Sensor Assembly     |        Eric/Jason            |
+| Week 5: 4/22 - 4/26 |     Final Assembly     |        Eric/Jason            |
 
 ### 12. Proposal Presentation
 
-[Add your slides to the Final Project Proposal slide deck in the Google Drive.](https://docs.google.com/presentation/d/1-Z5W7xg-WeICQvAZcTpaSmDrNKGdcdJ_jiM9-PyDwvM/edit?usp=sharing)
+[Add your slides to the Final Project Proposal slide deck in the Google Drive.](https://docs.google.com/presentation/d/1ALSWUez5a50TZqg0WIl5mQYvlcQxWxVERMfJZsW72Y8/edit?usp=sharing)
 
 ## Final Project Report
 
