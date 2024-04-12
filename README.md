@@ -120,10 +120,10 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 | **Week**            | **Task** | **Assigned To**    |
 |----------           |--------- |------------------- |
 | Week 1: 3/24 - 3/31 |  Block Diagram      | Jason |
-| Week 1: 3/24 - 3/31 |  Select and Order Parts      |   Eric |
-| Week 2: 4/1 - 4/7   |   Full 3D Schematic      |          Jason          |
-| Week 2: 4/1 - 4/7   |    Software Setup (Git/Microcontroller/etc)   |          Eric          |
-| Week 3: 4/8 - 4/14  |    Prototyping Parts with Microcontroller     |            Jason/Eric        |
+| Week 1: 3/24 - 3/31 |  Select Parts      |   Eric |
+| Week 2: 4/1 - 4/7   |   3D Organization      |          Jason          |
+| Week 2: 4/1 - 4/7   |    Software Setup   |          Eric          |
+| Week 3: 4/8 - 4/14  |    Prototyping Parts with Microcontroller/ Final Parts order    |            Jason/Eric        |
 | Week 4: 4/15 - 4/21 |   Finalize  Software/Hardware Logic for Clock/Display/Lights    |         Eric           |
 | Week 4: 4/15 - 4/21 | Finalize   Software/Hardware Logic for Dispensers    |         Jason           |
 | Week 5: 4/22 - 4/26 |     Quality Testing/Bug Fixing     |        Eric/Jason            |
