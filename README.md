@@ -31,29 +31,33 @@ We believe that TimeSink can help people organize their bathroom sink counter li
 
 ### 4. Software Requirements Specification (SRS)
 
-- Software shall be executed on the ATmega328PB microcontroller
-- Software source code shall be written in C
-- Software shall process ultrasonic sensor values to detect motion and proximity
-- Software shall maintain real-world time and weather, receiving updates via WiFi
-- Software shall trigger motors to dispense soap and toothpaste
-- Software shall trigger UV/night lights upon stimulus detection
-- Software shall handle user setting customization
-- Software should receive signals from ESP32 Feather Module representing weather data
+- Software shall be written in C for ATmega328PB microcontroller
+- Software written in C++ for ESP32 Feather microcontroller
+- Software shall process ultrasonic sensor values to detect proximity
+- Software shall maintain time and weather data via API calls over WiFi
+- Software shall trigger motors to dispense soap and toothpaste with nearby stimulus
+- Software shall trigger 3 minute UV light cycle with button press
+- Software shall trigger LED light for 2 minutes when IR sensor detects motion
+- Software shall handle user setting customization of location (may switch to simple geolocation)
 
 ### 5. Hardware Requirements Specification (HRS)
 
-- Project will contain a wall-based power supply that converts AC to DC, then steps down the voltage to within the operating range of each of the components using various converters
+- Project shall contain a wall-based power supply that converts AC to 5V DC with relatively high current (3A)
 - Project shall be contained within a 3D printed shell waterproofed by sealant
-- Project shall contain servo motors to dispense soap and toothpaste
+- Project shall use servo motors as trapdoors to dispense soap and toothpaste
 - Project shall contain ultrasonic sensors to detect proximity
 - Project shall contain IR sensor for motion detection
 - Project shall contain photoresistor that detects surrounding brightness
 - Project shall contain bright LED light that can light up room
-- Project shall contain LCD that is wired to the microcontroller
-- Project shall contain UV light for sterilizing toothbrushes
-- User customization shall be implemented with push buttons
-- Project shall be based on ATMega328PB microcontroller, with wire connections extending to each of the components
-- Microcontroller will be attached to ESP32 Feather Module utilizing SPI interface
+- Project shall contain LCD that is wired to an ATmega328PB microcontroller
+- Project shall contain UV light capable of sterilizing surfaces
+- User interface shall be button-based
+- ATmega328PB will be attached to ESP32 Feather Module utilizing SPI interface
+
+### BLOCK DIAGRAM
+We want to use a 3 microcontroller design for our product for simplicity/parallelism of development (one being the ESP 32 Feather).
+![alt text](image.png)
+![alt text](image-1.png)
 
 ### 6. MVP Demo
 
@@ -70,36 +74,46 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 ### 9. Components
 
 - ATmega328PB
-- UV Light
-- Motors (for dispensing)
+- UV Light (MISSING)
+- Motors (MISSING, Detkin might have)
 - Bright LED
 - LCD Screen
-- Base Structure (3D printed)
-- Sealant
+- Sealant (MISSING)
 - ESP32 Feather WiFi Board
 - Ultrasonic Sensors
-- IR Sensor
+- IR Sensor (TO TEST DETKIN ONES)
 - Logic Level Shifter
+- 5V wall power supply (MISSING)
+- 3D Printed Shell (MISSING, MVP demo will use cardboard shell)
+
+### TO BE ORDERED
+- Flex seal
+- 5V wall power supply
+- UV Light
+- (Possibly) Motors
 
 ### 10. Evaluation
 
 #### Dispensers
 - Dispensers detect hand positions correctly (within activation range or not) at least 9 times in 10 trials (stimulus)
 - Dispensers actuate motors when stimulus is detected and do not otherwise with 100% success rate
+- 0.5 g toothpaste is dispensed
+- 0.5 g soap is dispensed
 
 #### Display
 - Display maintains a real-time synced with external clock or user-set (within 10s of set/real time)
-- Display gathers weather information from 3rd party IOT device and displays it (within 24 hours)
+- Display gathers current weather information from 3rd party IOT device and displays it (within 1 hr)
 
 #### Lights
 - UV light activates when button is pressed (runs for approximately 3 minutes)
-- Motion-activated light turns on in dark when individual moves within 7 feet (9 in 10 success rate)
+- Motion-activated light turns on in dark when individual moves within 7 feet (8 in 10 success rate)
 
 #### Aesthetics/Ergonomics/Reliability
 - Wall/plug charging
 - 4x4 inch base size
 - Multitasking capability
 - All processes should continue to occur over 100 trials of various tasks
+- Should survive water splashes
 
 ### 11. Timeline
 
