@@ -22,7 +22,7 @@ We believe that TimeSink can help people organize their bathroom sink counter li
 ### 3. Goals
 
 1. Have digital display with current time and weather (IOT?)
-2. Have automatic dispensers for soap and toothpaste using ultrasonic sensors
+2. Have automatic dispensers for soap using ultrasonic sensors
 3. Have a motion-activated night light
 4. Have a UV light and moisture removal system for toothbrush holder
 5. 4x4 inch maximum base dimensions
