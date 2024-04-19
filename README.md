@@ -11,20 +11,20 @@
 
 ### 1. Abstract
 
-Our final project is TimeSink, an all-in-one bathroom tool to handle organization of common items, reducing mess and clutter on valuable counter real estate while offering a variety of features.
+Our final project is TimeSink, an all-in-one tool to handle organization of common bathroom items, reducing clutter on valuable sink counter real estate while offering a variety of useful features in one place.
 
 ### 2. Motivation
 
-Bathroom counters can be subject to some of the most pressing space constraints out of any place in the home. It can often be a daunting challenge to iterate on and settle on an arrangement of various home products like toothbrushes, toothpaste, and soap that conserves space while maintaining convenience. Additionally, the sink itself does little in the way of active assistance to the user, with no built-in functionality like lights, clocks, or self-cleaning capabilities. All of these issues combined can often result in the perfect storm, conspiring against users to leave the bathroom sink counter disorganized, unclean, and cluttered. 
+Bathroom counters can be subject to some of the most pressing space constraints out of any place in the home. It can often be a daunting challenge to iterate on and settle on an arrangement of various home products like toothbrushes, toothpaste, and soap that conserves space while maintaining convenience. Additionally, the sink itself does little in the way of active assistance to the user, with no built-in functionality like lights or clocks. All of these issues combined can often result in the perfect storm, conspiring against users to leave the bathroom sink counter disorganized, unclean, and messy. 
 
 We believe that TimeSink can help people organize their bathroom sink counter like never before. We want to make it easy to store and access the 20% of items and tools that will be used 80% of the time in a bathroom setting, reducing cognitive load in critical times such as the morning rush or bedtime and helping users establish a rhythm for their routines.
 
 ### 3. Goals
 
-1. Have digital display with current time and weather (IOT?)
-2. Have automatic dispensers for soap and toothpaste using ultrasonic sensors
-3. Have a motion-activated night light
-4. Have a UV light and moisture removal system for toothbrush holder
+1. Have digital display with current time and weather synced using WiFi
+2. Have automatic dispenser for soap using ultrasonic sensors
+3. Have a proximity-activated night light
+4. Have a gravity-based moisture removal system for toothbrush holder
 5. 4x4 inch maximum base dimensions
 6. Wall-chargable
 7. Waterproof
@@ -33,39 +33,51 @@ We believe that TimeSink can help people organize their bathroom sink counter li
 
 - Software shall be written in C for ATmega328PB microcontroller
 - Software written in C++ for ESP32 Feather microcontroller
+- Software will send data from Feather to ATmega328PB using UART
+- ATmega328PB will connect to LCD via SPI
 - Software shall process ultrasonic sensor values to detect proximity
+- Software shall evaluate photoresistor values to determine conditions for triggering peripherals
 - Software shall maintain time and weather data via API calls over WiFi
-- Software shall trigger motors to dispense soap and toothpaste with nearby stimulus
-- Software shall trigger 3 minute UV light cycle with button press
-- Software shall trigger LED light for 2 minutes when IR sensor detects motion
+- Software shall configure PWM to control servo to dispense soap
+- Software shall trigger LED light for 2 minutes when ultrasonic sensor detects nearby object
 - Software shall handle user setting customization of location (may switch to simple geolocation)
 
 ### 5. Hardware Requirements Specification (HRS)
 
-- Project shall contain a wall-based power supply that converts AC to 5V DC with relatively high current (3A)
+- Project shall contain a wall-based power supply that converts AC to 5V DC (3A max)
 - Project shall be contained within a 3D printed shell waterproofed by sealant
-- Project shall use servo motors as trapdoors to dispense soap and toothpaste
-- Project shall contain ultrasonic sensors to detect proximity
-- Project shall contain IR sensor for motion detection
+- Project shall use servo motor as trapdoor to dispense soap
+- Project shall have photoresistor-LED pair for hand detection
+- Project shall contain ultrasonic sensor for motion detection
 - Project shall contain photoresistor that detects surrounding brightness
 - Project shall contain bright LED light that can light up room
 - Project shall contain LCD that is wired to an ATmega328PB microcontroller
-- Project shall contain UV light capable of sterilizing surfaces
 - User interface shall be button-based
-- ATmega328PB will be attached to ESP32 Feather Module utilizing SPI interface
+- ATmega328PB will be attached to ESP32 Feather Module using 3.3V-5V Logic Level Shifter
 
 ### BLOCK DIAGRAM
-We want to use a 3 microcontroller design for our product for simplicity/parallelism of development (one being the ESP 32 Feather).
-![alt text](image.png)
-![alt text](image-1.png)
+We want to use a 3 microcontroller design for our product for parallelism of development (1 ESP 32 Feather, 2 ATmega328PB).
+![alt text](image-2.png)
+![alt text](image-3.png)
 
 ### 6. MVP Demo
 
-We hope to have the dispensers, basic LCD display software, and UV lights finished by the MVP.
+- Dispenser firmware and hardware model (servo and photoresistor)
+- API call to WiFi
+- UART between Feather and ATMega328PB
+- Weather info on ATmega328PB
+- Proximity light firmware and hardware model (ultrasonic sensor and LED)
 
 ### 7. Final Demo
 
-We want IOT for the weather, motion-activated night light, and full LCD display control finished after the MVP, with everything fitting in the housing with waterproofing applied.
+- GUI for WiFi connection and location selection, controlled with buttons
+- Photoresistor for external light detection to deactivate night light
+- Time information displayed on LCD
+- 3D printed Housing with toothbrush/toothpaste holder
+- Waterproofing with OTC sealant
+- 1 hr updates/resync of data
+- LCD displays triggered actions (night light, soap)
+- Organized wiring and power delivery
 
 ### 8. Methodology
 
@@ -74,14 +86,12 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 ### 9. Components
 
 - ATmega328PB
-- UV Light (MISSING)
-- Motors (MISSING, Detkin might have)
+- Servo Motor
 - Bright LED
 - LCD Screen
 - Sealant (MISSING)
 - ESP32 Feather WiFi Board
 - Ultrasonic Sensors
-- IR Sensor (TO TEST DETKIN ONES)
 - Logic Level Shifter
 - 5V wall power supply (MISSING)
 - 3D Printed Shell (MISSING, MVP demo will use cardboard shell)
@@ -89,15 +99,13 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 ### TO BE ORDERED
 - Flex seal
 - 5V wall power supply
-- UV Light
 - (Possibly) Motors
 
 ### 10. Evaluation
 
-#### Dispensers
-- Dispensers detect hand positions correctly (within activation range or not) at least 9 times in 10 trials (stimulus)
-- Dispensers actuate motors when stimulus is detected and do not otherwise with 100% success rate
-- 0.5 g toothpaste is dispensed
+#### Dispenser
+- Dispenser detects hand positions correctly (within activation range or not) at least 9 times in 10 trials (stimulus)
+- Dispenser actuates motor when stimulus is detected and do not otherwise with 100% success rate
 - 0.5 g soap is dispensed
 
 #### Display
@@ -113,7 +121,7 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 - 4x4 inch base size
 - Multitasking capability
 - All processes should continue to occur over 100 trials of various tasks
-- Should survive water splashes
+- Should survive small water splashes
 
 ### 11. Timeline
 
@@ -124,8 +132,8 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 | Week 2: 4/1 - 4/7   |   3D Organization      |          Jason          |
 | Week 2: 4/1 - 4/7   |    Software Setup   |          Eric          |
 | Week 3: 4/8 - 4/14  |    Prototyping Parts with Microcontroller/ Final Parts order    |            Jason/Eric        |
-| Week 4: 4/15 - 4/21 |   Finalize  Software/Hardware Logic for Clock/Display/Lights    |         Eric           |
-| Week 4: 4/15 - 4/21 | Finalize   Software/Hardware Logic for Dispensers    |         Jason           |
+| Week 4: 4/15 - 4/21 |   Finalize Software/Hardware Logic for Clock/Display/Lights    |         Eric           |
+| Week 4: 4/15 - 4/21 | Finalize Software/Hardware Logic for Dispensers    |         Jason           |
 | Week 5: 4/22 - 4/26 |     Quality Testing/Bug Fixing     |        Eric/Jason            |
 | Week 5: 4/22 - 4/26 |     Final Assembly     |        Eric/Jason            |
 
