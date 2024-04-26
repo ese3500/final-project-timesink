@@ -38,7 +38,7 @@ We believe that TimeSink can help people organize their bathroom sink counter li
 - Software shall process ultrasonic sensor values to detect proximity
 - Software shall evaluate photoresistor values to determine conditions for triggering peripherals
 - Software shall maintain time and weather data via API calls over WiFi
-- Software shall configure PWM to control servo to dispense soap
+- Software shall configure PWM to control motor to dispense soap
 - Software shall trigger LED light for 2 minutes when ultrasonic sensor detects nearby object
 - Software shall handle user setting customization of location (may switch to simple geolocation)
 
@@ -48,7 +48,7 @@ We believe that TimeSink can help people organize their bathroom sink counter li
 - Project shall be contained within a 3D printed shell waterproofed by sealant
 - Project shall use servo motor as trapdoor to dispense soap
 - Project shall have photoresistor-LED pair for hand detection
-- Project shall contain ultrasonic sensor for motion detection
+- Project shall contain IR sensor for motion detection
 - Project shall contain photoresistor that detects surrounding brightness
 - Project shall contain bright LED light that can light up room
 - Project shall contain LCD that is wired to an ATmega328PB microcontroller
