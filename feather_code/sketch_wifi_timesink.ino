@@ -21,13 +21,6 @@ char ip_address[16];
 char latitude[10] = "";
 char longitude[10] = "";
 
-/**
- * MOSI: 18
- * MISO: 19
- * SCK: 5
- * SS: 33
- */
-
 const String weather_target = "id\":";
 const String temp_target = "temp\":";
 const String latitude_target = "latitude\":";
