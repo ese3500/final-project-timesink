@@ -5,7 +5,7 @@
     * Team Members: Jason Ventura, Eric Zou
     * Github Repository URL: https://github.com/ese3500/final-project-skylens
     * Github Pages Website URL: [for final submission]
-    * Description of hardware: Laptop (For now)
+    * Description of hardware: Laptop, ATmega328PB (2), ESP 32 Feather, LEDs, 5V Peristaltic Pump, 120VAC-5VDC Wall Outlet Converter, Perf Board, PIR Motion Sensor, Joystick, Button, Photoresistors
 
 ## Final Project Proposal
 
@@ -33,22 +33,22 @@ We believe that TimeSink can help people organize their bathroom sink counter li
 
 - Software shall be written in C for ATmega328PB microcontroller
 - Software written in C++ for ESP32 Feather microcontroller
-- Software will send data from Feather to ATmega328PB using UART
+- Software will send data from Feather to ATmega328PB using SPI
 - ATmega328PB will connect to LCD via SPI
 - Software shall process ultrasonic sensor values to detect proximity
-- Software shall evaluate photoresistor values to determine conditions for triggering peripherals
+- Software shall evaluate ultrasonic sensor readings to determine conditions for triggering peripherals
 - Software shall maintain time and weather data via API calls over WiFi
 - Software shall configure PWM to control motor to dispense soap
 - Software shall trigger LED light for 2 minutes when ultrasonic sensor detects nearby object
-- Software shall handle user setting customization of location (may switch to simple geolocation)
+- Software shall handle user setting customization of location
 
 ### 5. Hardware Requirements Specification (HRS)
 
 - Project shall contain a wall-based power supply that converts AC to 5V DC (3A max)
 - Project shall be contained within a 3D printed shell waterproofed by sealant
 - Project shall use servo motor as trapdoor to dispense soap
-- Project shall have photoresistor-LED pair for hand detection
-- Project shall contain IR sensor for motion detection
+- Project shall have ultrasonic sensor for hand detection
+- Project shall contain ultrasonic sensor for motion detection
 - Project shall contain photoresistor that detects surrounding brightness
 - Project shall contain bright LED light that can light up room
 - Project shall contain LCD that is wired to an ATmega328PB microcontroller
