@@ -5,80 +5,108 @@
     * Team Name: TimeSink
     * Team Members: Jason Ventura, Eric Zou
     * Github Repository URL: https://github.com/ese3500/final-project-timesink
-    * Github Pages Website URL: [for final submission]
+    * Github Pages Website URL: https://ese3500.github.io/final-project-timesink/
     * Description of hardware: Laptop, ATmega328PB (2), ESP 32 Feather, LEDs, 5V Peristaltic Pump, 120VAC-5VDC Wall Outlet Converter, PIR Motion Sensor, Joystick, Button, Photoresistors
 
 ## Final Project Proposal
 
 ### 1. Abstract
 
-Our final project is TimeSink, an all-in-one tool to handle organization of common bathroom items, reducing clutter on valuable sink counter real estate while offering a variety of useful features in one place.
+Our final project is TimeSink, an all-in-one tool to handle common bathroom needs, reducing clutter on valuable sink counter real estate while offering a variety of useful features in one place.
 
 ### 2. Motivation
 
 Bathroom counters can be subject to some of the most pressing space constraints out of any place in the home. It can often be a daunting challenge to iterate on and settle on an arrangement of various home products like toothbrushes, toothpaste, and soap that conserves space while maintaining convenience. Additionally, the sink itself does little in the way of active assistance to the user, with no built-in functionality like lights or clocks. All of these issues combined can often result in the perfect storm, conspiring against users to leave the bathroom sink counter disorganized, unclean, and messy. 
 
-We believe that TimeSink can help people organize their bathroom sink counter like never before. We want to make it easy to store and access the 20% of items and tools that will be used 80% of the time in a bathroom setting, reducing cognitive load in critical times such as the morning rush or bedtime and helping users establish a rhythm for their routines.
+We believe that TimeSink can help people organize their bathroom sink counter like never before. We want to make it easy to store and access the 20% of items and tools that will be used 80% of the time in a bathroom setting, including soap dispensing, nightlight, weather sync and time sync. We want our device to reduce cognitive load in critical times such as the morning rush or before bedtime and and help users establish a rhythm for their routines.
 
 ### 3. Goals
 
-1. Have digital display with current time and weather synced using WiFi
-2. Have automatic dispenser for soap using ultrasonic sensors
-3. Have a proximity-activated night light
-4. Have a gravity-based moisture removal system for toothbrush holder
-5. 4x4 inch maximum base dimensions
-6. Wall-chargable
-7. Waterproof
+1. We want a digital display with current time and weather from WiFi.
+2. We want an automatic soap dispenser.
+3. We want the device to have user input for WiFi configuration.
+4. We want to have a proximity-activated night light
+5. We want the device to be wall-chargable.
+6. We want to have a toothbrush holder with gravity-based moisture removal.
+7. We want the product to fit within 4x4 inch maximum base dimensions.
+8. We want the device to be waterproof.
 
 ### 4. Software Requirements Specification (SRS)
 
-- Software shall be written in C for ATmega328PB microcontroller
-- Software written in C++ for ESP32 Feather microcontroller
-- Software will send data from Feather to ATmega328PB using SPI
-- ATmega328PB will connect to LCD via SPI
-- Software shall process ultrasonic sensor values to detect proximity
-- Software shall evaluate ultrasonic sensor readings to determine conditions for triggering peripherals
-- Software shall maintain time and weather data via API calls over WiFi
-- Software shall configure PWM to control motor to dispense soap
-- Software shall trigger LED light for 2 minutes when ultrasonic sensor detects nearby object
-- Software shall handle user setting customization of location
+**SRS 1.** Software shall be written in C for ATmega328PB microcontrollers.
+
+**SRS 2.** Software shall be written in C++ for ESP32 Feather WiFi module.
+
+**SRS 3.** ATmega328PB shall encode communication with Feather in accordance with the SPI protocol.
+
+**SRS 4.** ATmega328PB shall encode communication with LCD screen in accordance with the SPI protocol.
+
+**SRS 5.** Software shall process ultrasonic sensor values to detect proximity.
+
+**SRS 6.** Software shall evaluate ultrasonic sensor readings to trigger peripheral motor when hand is within 4 cm.
+
+**SRS 7.** Software shall correctly evaluate ultrasonic sensor and photoresistor readings to trigger peripheral LED in darkness when motion is detected.
+
+**SRS 8.** ATmega328PB controlling peripherals will set pins to signal actions to ATmega328PB controlling LCD.
+
+**SRS 9.** Software shall maintain weather data via API calls over WiFi, accurate to within 1 hour.
+
+**SRS 10.** Software shall maintain time data via API calls over WiFi to within 10s of real time.
+
+**SRS 11.** Software shall use PWM to control motor to dispense soap.
+
+**SRS 12.** Software shall set LED light pin for 2 minutes when nearby object detected.
+
+**SRS 13.** Software shall handle user setting customization of location.
 
 ### 5. Hardware Requirements Specification (HRS)
 
-- Project shall contain a wall-based power supply that converts AC to 5V DC (3A max)
-- Project shall be contained within a 3D printed shell waterproofed by sealant
-- Project shall use servo motor as trapdoor to dispense soap
-- Project shall have ultrasonic sensor for hand detection
-- Project shall contain ultrasonic sensor for motion detection
-- Project shall contain photoresistor that detects surrounding brightness
-- Project shall contain bright LED light that can light up room
-- Project shall contain LCD that is wired to an ATmega328PB microcontroller
-- User interface shall be button-based
-- ATmega328PB will be attached to ESP32 Feather Module using 3.3V-5V Logic Level Shifter
+**HRS 1.** Project shall contain a wall-based power supply that converts AC to 5V DC.
 
-### BLOCK DIAGRAM
-We want to use a 3 microcontroller design for our product for parallelism of development (1 ESP 32 Feather, 2 ATmega328PB).
+**HRS 2.** Project shall be contained within a 3D printed shell waterproofed by sealant.
+
+**HRS 3.** Project shall use servo motor as trapdoor to dispense soap.
+
+**HRS 4.** Project shall have ultrasonic sensor for hand detection.
+
+**HRS 5.** Project shall contain ultrasonic sensor for motion detection.
+
+**HRS 6.** Project shall contain photoresistor that detects ambient brightness.
+
+**HRS 7.** Project shall contain bright LED light that can light up room in the dark.
+
+**HRS 8.** Project shall contain LCD that is wired to an ATmega328PB microcontroller via an SPI interface.
+
+**HRS 9.** User interface shall be button-based.
+
+**HRS 10.** ATmega328PB will be attached to ESP32 Feather Module using 3.3V-5V Logic Level Shifter.
+
+**HRS 11.** Device shall use gravity to drain toothbrush storage container.
+
+**HRS 12.** Device shall fit within a 4x4 inch space.
+
+### Block Diagram
 ![alt text](image-2.png)
 ![alt text](image-3.png)
 
 ### 6. MVP Demo
 
-- Dispenser firmware and hardware model (servo and photoresistor)
-- API call to WiFi
-- UART between Feather and ATMega328PB
-- Weather info on ATmega328PB
-- Proximity light firmware and hardware model (ultrasonic sensor and LED)
+1. Dispenser firmware and hardware model (servo and photoresistor)
+2. API calls with ESP32 Feather
+3. UART between Feather and ATMega328PB
+4. Weather info on ATmega328PB
+5. Proximity light firmware and hardware model (ultrasonic sensor and LED)
 
 ### 7. Final Demo
 
-- GUI for WiFi connection and location selection, controlled with buttons
-- Photoresistor for external light detection to deactivate night light
-- Time information displayed on LCD
-- 3D printed Housing with toothbrush/toothpaste holder
-- Waterproofing with OTC sealant
-- 1 hr updates/resync of data
-- LCD displays triggered actions (night light, soap)
-- Organized wiring and power delivery
+1. GUI for WiFi connection and location selection, controlled with buttons
+2. Photoresistor for external light detection to deactivate night light
+3. Time information displayed on LCD
+4. 3D printed Housing with toothbrush/toothpaste holder
+5. Waterproofing with sealant
+6. 1 hr updates/resync of data
+7. LCD displays triggered actions (night light, soap)
+8. Organized wiring and power delivery in one box
 
 ### 8. Methodology
 
@@ -87,19 +115,18 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 ### 9. Components
 
 - ATmega328PB
-- ~~Servo Motor~~
 - Bright LEDs
 - LCD Screen
-- ~~Sealant~~
 - ESP32 Feather WiFi Board
-- ~~Ultrasonic Sensors~~
 - 3.3V-5V Bidirectional Logic Level Shifter
-- 5V wall power supply
-- ~~3D Printed Shell~~
 - 5V wall power supply
 - Peristaltic Pump
 - Photoresistors
 - PIR Motion Sensor
+- ~~Ultrasonic Sensors~~
+- ~~3D Printed Shell~~
+- ~~Servo Motor~~
+- ~~Sealant~~
 
 ### 10. Evaluation
 
@@ -139,12 +166,9 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 
 ### 12. Proposal Presentation
 
-[Add your slides to the Final Project Proposal slide deck in the Google Drive.](https://docs.google.com/presentation/d/1ALSWUez5a50TZqg0WIl5mQYvlcQxWxVERMfJZsW72Y8/edit?usp=sharing)
+[Link to Slides](https://docs.google.com/presentation/d/1ALSWUez5a50TZqg0WIl5mQYvlcQxWxVERMfJZsW72Y8/edit?usp=sharing)
 
 ## Final Project Report
-
-Don't forget to make the GitHub pages public website!
-If you’ve never made a Github pages website before, you can follow this webpage (though, substitute your final project repository for the Github username one in the quickstart guide):  <https://docs.github.com/en/pages/quickstart>
 
 ### 1. Video
 
@@ -156,32 +180,73 @@ If you’ve never made a Github pages website before, you can follow this webpag
 
 ### 3. Results
 
-What were your results? Namely, what was the final solution/design to your problem?
+Our final device is a 6-by-6 inch base cardboard box that houses a soap dispenser, toothbrush storage space, a display with current time and weather synced with user configured WiFi, and a nightlight activated by motion sensor.
+
+Our final implementation involved 2 separate systems powered by the same 5 VDC supply. One system was responsible for managing the soap dispenser and nightlight, while the other was responsible for mana
 
 #### 3.1 Software Requirements Specification (SRS) Results
 
-Based on your quantified system performance, comment on how you achieved or fell short of your expected software requirements. You should be quantifying this, using measurement tools to collect data.
+| **Requirement**            | **Criteria** | **Result** | **Status**    |
+|----------           |--------- |--------|----------- |
+| 1| Project powered using wall outlet converter supplying 5 VDC, measured by O-scope; No other sources of power| ~5.1 V measured, only power source | Passed|
+| 2| Electronics housed in watertight 3D-printed shell| Final build was cardboard box | Failed|
+| 3|  | |
+| 4| | |
+| 5| | |
+| 6| | |
+| 7| | |
+| 8| | |
+| 9| | |
+| 10| | |
+| 11| | |
+| 12| | |
+| 13| | |
 
 #### 3.2 Hardware Requirements Specification (HRS) Results
 
-Based on your quantified system performance, comment on how you achieved or fell short of your expected hardware requirements. You should be quantifying this, using measurement tools to collect data.
+| **Requirement**            | **Criteria** | **Status**    |
+|----------           |--------- |------------------- |
+| 1| | |
+| 2| | |
+| 3| | |
+| 4| | |
+| 5| | |
+| 6| | |
+| 7| | |
+| 8| | |
+| 9| | |
+| 10| | |
+| 11| | |
+| 12| | |
+| 13| | |
 
 ### 4. Conclusion
 
 Reflect on your project. Some questions to consider: What did you learn from it? What went well? What accomplishments are you proud of? What did you learn/gain from this experience? Did you have to change your approach? What could have been done differently? Did you encounter obstacles that you didn’t anticipate? What could be a next step for this project?
 
+#### Successes
+
+#### Shortcomings
+
+#### Lessons Learned
+
+#### Next Steps
+Next steps for this project would involve meeting the unmet hardware and software requirements relevant to the project goals. This would mean re-assembling the project in the 3D printed shell and moving the code in the ATmega328PBs into a single microcontroller for space efficiency. We would then waterproof the device so that it can be used in a standard bathroom setting with extremely low risk. 
+
+Some additional considerations that we could consider involve the considerations about the consumer experience using the device. For example, we could look to use the ATmega328PB to turn off the WiFi module when it is not being used, storing login details entirely in memory and rebooting the module only when a refresh is needed. This would make the device more suited for its role with lower power consumption. The user interface could also be improved, with the configuration tools being in a less visible spot for a cleaner design and the interface being redesigned to have larger text and more intuitive instructions.
+
+In a final product, we might consider improvements like only activating the LCD when motion is detected and reducing the size further.
+
 ## References
 
-Fill in your references here as you work on your proposal and final submission. Describe any libraries used here.
+### LCD SPI Library
 
-## Github Repo Submission Resources
+### ESP32 Feather WiFi Library
 
-You can remove this section if you don't need these references.
+### ESP32 Feather HTTP Library
 
-* [ESE5160 Example Repo Submission](https://github.com/ese5160/example-repository-submission)
-* [Markdown Guide: Basic Syntax](https://www.markdownguide.org/basic-syntax/)
-* [Adobe free video to gif converter](https://www.adobe.com/express/feature/video/convert/video-to-gif)
-* [Curated list of example READMEs](https://github.com/matiassingers/awesome-readme)
-* [VS Code](https://code.visualstudio.com/) is heavily recommended to develop code and handle Git commits
-  * Code formatting and extension recommendation files come with this repository.
-  * Ctrl+Shift+V will render the README.md (maybe not the images though)
+### ESP32 Feather String Library
+
+### ESP32 Feather Serial (UART) Library
+
+### Documentation Used
