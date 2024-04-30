@@ -1,6 +1,6 @@
 /*
  * Display_lib.h
- *
+ * Helpers for updating time and weather
  * Created: 4/24/2024 4:34:50 PM
  *  Author: ezou6
  */ 
