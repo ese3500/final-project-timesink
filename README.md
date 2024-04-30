@@ -5,7 +5,7 @@
     * Team Members: Jason Ventura, Eric Zou
     * Github Repository URL: https://github.com/ese3500/final-project-skylens
     * Github Pages Website URL: [for final submission]
-    * Description of hardware: Laptop, ATmega328PB (2), ESP 32 Feather, LEDs, 5V Peristaltic Pump, 120VAC-5VDC Wall Outlet Converter, Perf Board, PIR Motion Sensor, Joystick, Button, Photoresistors
+    * Description of hardware: Laptop, ATmega328PB (2), ESP 32 Feather, LEDs, 5V Peristaltic Pump, 120VAC-5VDC Wall Outlet Converter, PIR Motion Sensor, Joystick, Button, Photoresistors
 
 ## Final Project Proposal
 
@@ -86,20 +86,19 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 ### 9. Components
 
 - ATmega328PB
-- Servo Motor
-- Bright LED
+- ~~Servo Motor~~
+- Bright LEDs
 - LCD Screen
-- Sealant (MISSING)
+- ~~Sealant~~
 - ESP32 Feather WiFi Board
-- Ultrasonic Sensors
-- Logic Level Shifter
-- 5V wall power supply (MISSING)
-- 3D Printed Shell (MISSING, MVP demo will use cardboard shell)
-
-### TO BE ORDERED
-- Flex seal
+- ~~Ultrasonic Sensors~~
+- 3.3V-5V Bidirectional Logic Level Shifter
 - 5V wall power supply
-- (Possibly) Motors
+- ~~3D Printed Shell~~
+- 5V wall power supply
+- Peristaltic Pump
+- Photoresistors
+- PIR Motion Sensor
 
 ### 10. Evaluation
 
