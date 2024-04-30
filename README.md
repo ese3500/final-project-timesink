@@ -1,9 +1,10 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/2TmiRqwI)
-# final-project-timesink-team14
+# TimeSink
+## ESE 3500 Final Project: Team 14
+### Jason Ventura and Eric Zou
   
     * Team Name: TimeSink
     * Team Members: Jason Ventura, Eric Zou
-    * Github Repository URL: https://github.com/ese3500/final-project-skylens
+    * Github Repository URL: https://github.com/ese3500/final-project-timesink
     * Github Pages Website URL: [for final submission]
     * Description of hardware: Laptop, ATmega328PB (2), ESP 32 Feather, LEDs, 5V Peristaltic Pump, 120VAC-5VDC Wall Outlet Converter, PIR Motion Sensor, Joystick, Button, Photoresistors
 
