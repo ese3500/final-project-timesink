@@ -71,21 +71,15 @@ char wait_for_real_response() {
 
 void send_wifi_networks() {
   wait_for_response();
-  Serial.println("Got here");
   char num_networks = (char) WiFi.scanNetworks();
   Serial2.print(num_networks);
-  Serial.println((int) num_networks);
   wait_for_response(); //clear buffer
   char response = wait_for_response();
-  Serial.println((char) response);
-  Serial.println((int) response);
   while(1) {
     send_string(WiFi.SSID((int) response));
-    Serial.println(WiFi.SSID((int) response));
     char response2 = wait_for_response();
     if (response2 == response) {
       SSID = WiFi.SSID(response);
-      Serial.println(SSID);
       break;
     } else {
       response = response2;
@@ -100,25 +94,20 @@ void await_wifi_credentials() {
 }
 
 void setup() {
-  Serial.begin(9600);
   Serial2.begin(9600, SERIAL_8N2, RXD2, TXD2);
-  while (!Serial && !Serial2);
+  while (!Serial2);
   send_wifi_networks();
   while(WiFi.status() != WL_CONNECTED){
     await_wifi_credentials();
-    Serial.println(SSID);
-    Serial.println(PASSWORD);
     int result = WiFi.begin(SSID, PASSWORD);
     int start_time = millis();
     while(WiFi.status() != WL_CONNECTED && (millis() - start_time < 10000)) {
       delay(1000);
     }
     if (WiFi.status() == WL_CONNECTED) {
-      Serial.print('Made it');
       Serial2.print('S');
       break;
     } else {
-      Serial.print('Failed');
       Serial2.print('F');
     }
   }
@@ -135,7 +124,6 @@ void loop() {
   char action_character;
   while (Serial2.available()){
     action_character = Serial2.read();
-    Serial.println(action_character);
   }
   switch (action_character) {
     case 'w':
@@ -145,7 +133,6 @@ void loop() {
       refresh_time();
       break;
     default:
-      Serial.println("Bad read");
       break;
   }
 }
@@ -220,7 +207,6 @@ void refresh_lat_long(String* lat_long_ptr) {
   HTTPClient http;
   String path = GEOLOCATION_API_SERVER + String(ip_address);
   http.begin(path.c_str());
-  Serial.println(path);
   int httpResponseCode = http.GET();
   if (httpResponseCode == 200) {
     *lat_long_ptr = http.getString();
@@ -278,7 +264,6 @@ void refresh_weather() {
     Serial2.print('F');
     return;
   }
-  Serial.println(lat_long);
   set_lat_long(&lat_long);
   if (strlen(latitude) == 0 || strlen(longitude) == 0) {
     Serial2.print('F');
@@ -290,12 +275,10 @@ void refresh_weather() {
   path += "&lon=" + String(longitude);
   path += "&appid=" + WEATHER_API_KEY;
   path += "&units=imperial";
-  Serial.println(path);
   http.begin(path.c_str());
   int httpResponseCode = http.GET();
   if (httpResponseCode == 200) {
     String payload = http.getString();
-    Serial.println(payload);
     Serial2.print((char) parse_payload_temp(&payload));
     Serial2.print(parse_payload_weather(&payload));
   } else {
@@ -360,7 +343,6 @@ void refresh_time() {
   int httpResponseCode = http.GET();
   if (httpResponseCode == 200) {
     String payload = http.getString();
-    Serial.println(payload);
     send_time(&payload);
   } else {
     Serial2.print('F');
