@@ -10,9 +10,9 @@ String PASSWORD;
 //"Detkin IOT North" "n0rthC0untry" 
 //"Keterrer IOT" "theCl0ud";
 const String GET_IP_ADDRESS = "https://www.trackip.net/ip";
-const String GEOLOCATION_API_SERVER = "https://api.ip2location.io/?key=04F3AB71FEF41E182C3C5BDA4EFEDBCD&ip=";
+const String GEOLOCATION_API_SERVER = "https://api.ip2location.io/?key=API_KEY&ip=";
 
-const String WEATHER_API_KEY = "194bd52413b9768884fde5751895b7ed";
+const String WEATHER_API_KEY = "API_KEY";
 const String WEATHER_API_SERVER = "https://api.openweathermap.org/data/2.5/weather?";
 
 const String TIME_API_SERVER = "https://api.geotimezone.com/public/timezone?";
