@@ -132,7 +132,6 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 
 #### Dispenser
 - Dispenser detects hand positions correctly (within activation range or not) at least 9 times in 10 trials (stimulus)
-- Dispenser actuates motor when stimulus is detected and do not otherwise with 100% success rate
 - 0.5 g soap is dispensed
 
 #### Display
@@ -186,7 +185,7 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 
 Our final device is a 6-by-6 inch base cardboard box that houses a soap dispenser, toothbrush storage space, a display with current time and weather synced with user configured WiFi, and a nightlight activated by motion sensor.
 
-Our final implementation involved 2 separate systems powered by the same 5 VDC supply. One system was responsible for managing the soap dispenser and nightlight, while the other was responsible for mana
+Our final implementation involved 2 separate systems powered by the same 5 VDC supply. One system was responsible for managing the soap dispenser and nightlight, while the other was responsible for managing the information processing and display.
 
 #### 3.1 Software Requirements Specification (SRS) Results
 
@@ -253,12 +252,18 @@ In a final product, we might consider improvements like only activating the LCD 
 
 ### LCD SPI Library
 
+We read through the documentation (https://www.espressif.com/en/products/socs/esp32) and examples for the ESP32 and Arduino provided by in the Arduino IDE, which we used to program the Feather. 
+
 ### ESP32 Feather WiFi Library
 
+
 ### ESP32 Feather HTTP Library
+This library allows us to make arbitrary HTTP requests for web resources once we are connected to a WiFi network. 
 
 ### ESP32 Feather String Library
+This is a class that abstracts the character arrays used to store strings in C. This class deals with String objects, which have utility methods that allow for simpler code for comparisons, getting specific characters or chunks of the Strings, and 
 
 ### ESP32 Feather Serial (UART) Library
+This is a class that abstracts the UART Serial interface in the ESP32. The underlying hardware is exactly the same, with a receive pin and a transmit pin for both directions of communication. Serial2 in the code refers to the hardware serial, which is initialized to the pins defined. Serial2 takes some time to set up, so we wait for it. Then, Serial2 can be used to send data through the UART connection using the print and println commands, which send individual bytes of data through the transmit line. We can also read from the receiver line, which uses a FIFO queue to buffer the inputs received. Serial2.available() checks if there is some data to read, and Serial2.read() reads one byte of data (hanging until a byte becomes available), enough to encode a character (we make use of this to send requests encoded as characters). Serial2.readBytesUntil() is also used since we can send C-strings back from the ATmega328PB with the null terminator which is the stopping point for the read. 
 
 ### Documentation Used
