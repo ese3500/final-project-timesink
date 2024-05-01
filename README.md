@@ -210,17 +210,17 @@ Our final implementation involved 2 separate systems powered by the same 5 VDC s
 |----------           |--------- |--------|----------- |
 | 1| Project powered using wall outlet converter supplying 5 VDC, measured by O-scope; No other sources of power| ~5.1 V measured, only power source | Passed|
 | 2| Electronics housed in watertight 3D-printed shell| Final build was cardboard box | Failed|
-| 3|  | |
-| 4| | |
-| 5| | |
-| 6| | |
-| 7| | |
-| 8| | |
-| 9| | |
-| 10| | |
-| 11| | |
-| 12| | |
-| 13| | |
+| 3| The servo motor will act as a switch in order to open and close our container which holds soap. | We opted to use a pump instead, since it is DC powered so we don't have to worry about controlling the servo.| Failure
+| 4| Placing an ultrasonic sensor facing into the input slot, we can detect any changes in movement that would occur when someone places their hand in the box. This would act as a trigger for dispensing soap.| We replaced this with an LED and photoresistor, since the ultrasonic sensor would take up a lot of space inside the box. | Failure
+| 5|The ultrasonic sensor will be placed on the outside of the box pointing outwards, in order to correctly detect if anyone walks by the box. |We opted to use a motion sensor instead which worked better and more accurately.| Failure
+| 6| A photoresistor will be placed on the outside of the box in order to detect when the surrounding light is below ambient lighting, which will act as an input into considering whether to turn the night light on or off (along with the motion detection).| We set up the photoresistor with an ADC pin, and fine tuned the limit to work to turn on the night light when it was dark in the room. | Success
+| 7| The night light will be able to illuminate the box and the area around it. |The lights were much more fragile than expected, so only 1 of the 3 ended up being used in the final product. In the future, we should use more durable LEDs, or consider a bulb instead. | Failure
+| 8| We will use an SPI protocol in order to write to the LCD screen. | We succesfully used SPI to communicate btween the two, and write all the characters we needed that updated in real-time.| Success. 
+| 9| Since the device requires user input, we hope to make it all physical and part of the device, instead of having to change it in code, and re-upload. | We used a joystick in order to cycle through different options, and a button in order to select them. It worked for selecting Wifis, and typing in their passwords.| Success
+| 10| A logic level shifter will connect our ESP32 to the ATMEGA328PB, since we need communication between both and the devices run on different voltages. We will need a 3.3 to 5V communication line.| We successfully implemented a LLS, which worked in communicating between the two.| Success
+| 11| A small hole will serve as a drain for our toothbrush/toothpaste holder, in order to remove any excessive moisture from our system.| We ended up using cups, and we didn't have time to implement a drain, but it should be a quick fix if our product were to be finalized. | Failure
+| 12| All of our components should fit with in an area of 4x4 in, with a height of ~6in.  |Our box ended up being 140x140mm, which is ~ 5.5 inches x 5.5 inches.  | Failure
+
 
 ### 4. Conclusion
 
