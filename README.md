@@ -210,24 +210,26 @@ Our final implementation involved 2 separate systems powered by the same 5 VDC s
 |----------           |--------- |--------|----------- |
 | 1| Project powered using wall outlet converter supplying 5 VDC, measured by O-scope; No other sources of power| ~5.1 V measured, only power source | Passed|
 | 2| Electronics housed in watertight 3D-printed shell| Final build was cardboard box | Failed|
-| 3|  | |
-| 4| | |
-| 5| | |
-| 6| | |
-| 7| | |
-| 8| | |
-| 9| | |
-| 10| | |
-| 11| | |
-| 12| | |
-| 13| | |
+| 3| The servo motor will act as a switch in order to open and close our container which holds soap. | We opted to use a pump instead, since it is DC powered so we don't have to worry about controlling the servo.| Failure
+| 4| Placing an ultrasonic sensor facing into the input slot, we can detect any changes in movement that would occur when someone places their hand in the box. This would act as a trigger for dispensing soap.| We replaced this with an LED and photoresistor, since the ultrasonic sensor would take up a lot of space inside the box. | Failure
+| 5|The ultrasonic sensor will be placed on the outside of the box pointing outwards, in order to correctly detect if anyone walks by the box. |We opted to use a motion sensor instead which worked better and more accurately.| Failure
+| 6| A photoresistor will be placed on the outside of the box in order to detect when the surrounding light is below ambient lighting, which will act as an input into considering whether to turn the night light on or off (along with the motion detection).| We set up the photoresistor with an ADC pin, and fine tuned the limit to work to turn on the night light when it was dark in the room. | Success
+| 7| The night light will be able to illuminate the box and the area around it. |The lights were much more fragile than expected, so only 1 of the 3 ended up being used in the final product. In the future, we should use more durable LEDs, or consider a bulb instead. | Failure
+| 8| We will use an SPI protocol in order to write to the LCD screen. | We succesfully used SPI to communicate btween the two, and write all the characters we needed that updated in real-time.| Success. 
+| 9| Since the device requires user input, we hope to make it all physical and part of the device, instead of having to change it in code, and re-upload. | We used a joystick in order to cycle through different options, and a button in order to select them. It worked for selecting Wifis, and typing in their passwords.| Success
+| 10| A logic level shifter will connect our ESP32 to the ATMEGA328PB, since we need communication between both and the devices run on different voltages. We will need a 3.3 to 5V communication line.| We successfully implemented a LLS, which worked in communicating between the two.| Success
+| 11| A small hole will serve as a drain for our toothbrush/toothpaste holder, in order to remove any excessive moisture from our system.| We ended up using cups, and we didn't have time to implement a drain, but it should be a quick fix if our product were to be finalized. | Failure
+| 12| All of our components should fit with in an area of 4x4 in, with a height of ~6in.  |Our box ended up being 140x140mm, which is ~ 5.5 inches x 5.5 inches.  | Failure
+
+For the evaluation, we noted the following results: For our DISPENSER, we got the hand detection to work in 10 out of 10 trials, meeting our goal. However, we consistently dispensed more than 0.5 grams of soap, which is something we can change by cutting the time the pump is on per call. For our DISPLAY, both of our goals were met: Our clock was correct down to the second, exceeding our goal of 10s real time accuracy, and our weather updated every hour, matching our evaluation goal. For LIGHTS, we ended up not using a UV light, due to safety concerns and the fact that it was essentially a repeat of other components that worked on proximity, so it would just be copying and pasting code. For our motion detection in the dark, we had the light turn on only when it was dark in the room, and when motion was detected within a foot. This worked consistently 10 out of 10 times, but we did not change the values to work for as large as 7 feet. In terms of AESTHETICS/ERGONOMICS/RELIABILITY, our device did end up being completely wall powered, allowing for portability and ease of use. However, our box was not 4x4 inches, and was instead 140x140mm. Any smaller would cause significant difficulty in fitting the components, due to the amount of wires needed and since we used two ATMEGA328PBs. The multitasking capability was a success, as we tested it to work with the nightlight on, time being displayed, and dispensing soap at the same time. We tested our product to work over 100 combined trials for each sensor, and they worked essentially everytime, so we managed to get good values in order to both detect any genuine inputs, but ignore any noise or accidents. Our final product was going to be waterproof as it was going to be 3D printed, and the inside edges waterproofed, but we did not manage to get our 3D printing done in time, so we opted to instead make a cardboard box, with some tape along the edges inside. This device is nowhere near as waterproof, but can still resist small splashes. However, long term it is susceptible to mold and water damage, so a final product would use 3D printing instead, which would also improve general durability. 
+
 
 ### 4. Conclusion
 
 Reflect on your project. Some questions to consider: What did you learn from it? What went well? What accomplishments are you proud of? What did you learn/gain from this experience? Did you have to change your approach? What could have been done differently? Did you encounter obstacles that you didn’t anticipate? What could be a next step for this project?
 
 #### Successes
-Our f
+In terms of successes, we managed to successfully reach almost all of the original requirements we wanted, although sometimes in a different way than planned. After an initial wifi setup, the device is essentially hands-free. We got the Wifi-connectivity to work, which was a huge plus, since getting user input from just a joystick in order to type in a password was also a large task, but also allowed it to work without needing to have code re-uploaded in case it's location changed locally. All of our IoT functionality met or exceeded our expectations. Additionally, the dispensing of the soap was a success. Our original idea of using a trap door would have been full of issues, so opting to use a pump (which we technically marked as a failure) was a much better move. It also allows us to much more easily fine tune and control the amount of soap dispensed by changing the duration of time the soap is on. Lastly, our motion and ambient lighting sensors worked with essentially 100% accuracy, since we worked to perfect the trigger values for the sensors. overall, our project was a great success, and we reached all the goals we wanted. 
 
 #### Shortcomings
 The internals of the project could have used improvement in both design and implementation. For one, we likely could have used one ATmega328PB to handle both the connections to the peripheral sensors/actuators as well as the WiFi and display components. Not doing this meant we needed to accomodate extra room for both microcontrollers and power them in a less uniform manner. This ultimately resulted in disorganized internal wiring that was difficult to fit inside the housing.
@@ -237,7 +239,7 @@ In terms of the overall build quality, the project suffered due to scheduling is
 In the circuit implementations, we did finalize some connections by sautering wires to a perfboard, but overall the organization could have been much cleaner and more compact. We also had some issues with common grounding that caused some debugging pains. We also could have picked more applicable sensors.
 
 #### Lessons Learned
-
+We learned about the importance of scheduling, and circuit organization. We had a lot of difficulty managing to fit our circuits in, due to how we organized wires. I think that if we planned out how we were going to organize and stack our boards, we would have a much cleaner internal layout of our box, which would also allow for quick physical debugging, especially since we had hardware wiring issues which took a significant amount of time to debug. In terms of scheduling, we learned that we need to get any external requests in early, such as part orders or 3D printing jobs. We also learned about better debugging techniques, such as where to place UART statements, and to better read data sheets in order to see if any pins conflict in usage. 
 #### Next Steps
 Next steps for this project would involve meeting the unmet hardware and software requirements relevant to the project goals. This would mean re-assembling the project in the 3D printed shell and moving the code in the ATmega328PBs into a single microcontroller for space efficiency. We would then waterproof the device so that it can be used in a standard bathroom setting with extremely low risk. We might also want to switch out the photoresistor-LED pair for hand detection with another form of motion detection, like a small ultrasonic sensor or a PIR motion detector like the nightlight. This could reduce long-term power consumption.
 
