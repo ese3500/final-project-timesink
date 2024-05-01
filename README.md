@@ -172,11 +172,15 @@ We would like to 3D print a frame and housing for each of the components. Ideall
 
 ### 1. Video
 
-[Video Link](https://youtu.be/FBzL9NcnUS8)
+### [Video Link](https://youtu.be/FBzL9NcnUS8)
 
 ### 2. Images
 
-[Insert final project images here]
+![alt text](IMG_1358.png)
+![alt text](IMG_1359.png)
+![alt text](IMG_1360.png)
+![alt text](IMG_1361.png)
+![alt text](IMG_1362.png)
 
 ### 3. Results
 
