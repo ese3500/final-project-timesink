@@ -189,29 +189,28 @@ Our final implementation involved 2 separate systems powered by the same 5 VDC s
 
 #### 3.1 Software Requirements Specification (SRS) Results
 
+| **Requirement**            | **Criteria** | **Result** |
+|----------           |--------- |------------------- |
+| 1| Software shall be written in C for ATmega328PB microcontrollers.| ATMEGA code completely written in C | Success, working | 
+| 2| Software shall be written in C++ for ESP32 Feather WiFi module.| ESP32 Code programmed using Arduino IDE in C++| Success, working |
+| 3| ATmega328PB shall encode communication with Feather in accordance with the SPI protocol.| Communication between feather and arduino will be purely through SPI| Failure, we didn't end up using SPI since parents didn't arrive on time. Instead, we used UART. 
+| 4| ATmega328PB shall encode communication with LCD screen in accordance with the SPI protocol. | Communication between LCD and ATMEGA328PB will be entirely in SPI. | Failure, we figured out how to do UART, so we used that instead, since we didn't get the parts for SPI on time. 
+| 5| Software shall process ultrasonic sensor values to detect proximity.|Using ADC, we convert the signal from our ultrasonic sensors to be able to create thresholds for actuators. | Failure, but this is because we replaced it with a better alternative. Instead, we used a motion sensor to detect proximity. |
+| 6|  Software shall evaluate ultrasonic sensor readings to trigger peripheral motor when hand is within 4 cm.| | Failure, similar to last requirement, we stopped using ultrasonic in exchange for a motion sensor, since it was more compact. We figured out the ADC limits to get it to work for ~4cm, so it was technically a success for our motion sensor. 
+| 7| Software shall correctly evaluate ultrasonic sensor and photoresistor readings to trigger peripheral LED in darkness when motion is detected.| Using ADC, we convert the photoresistor readings into values that we can use to create limits for turning on our night light.| Success. We managed to get ADC working for all of our sensors, and we got it to work when ambient lighting was considered 'dark'. 
+| 8| ATmega328PB controlling peripherals will set pins to signal actions to ATmega328PB controlling LCD.| Using the pins on the LCD, we will connect them directly to our ATMEGA, and use them to power and communicate with our LCD display in order to show and update messages.| Success. We managed to successfully update the LCD screen whenever it was needed. 
+| 9| Software shall maintain weather data via API calls over WiFi, accurate to within 1 hour.|Using our ESP32, we will use online APIs in order to get info the current time and weather. We will also use another API which grabs the IP address and uses it to find the current location, in order to get accurate local weather and time information. |Success, we managed to get our weather to be accurate to the hour, and time to the second. |
+| 10| Software shall maintain time data via API calls over WiFi to within 10s of real time.| See above.| Success, we managed to get time to be accurate within the second for every time we used it. 
+| 11|  Software shall use PWM to control motor to dispense soap.| Using a servo motor controlled by PWM, it will open or close a latch that allows soap to fall through.| Failure. We found a better alternative that is cleaner and easier to program. We used a DC motor pump, which can cleanly flow soap from our storage to the palm of your hand, all by flipping a pin value, instead of having to worry about PWM signals. 
+| 12|  Software shall set LED light pin for 2 minutes when nearby object detected.| Using our ambient light photoresistor, as well as motion detector, it will trigger when the night light should be turned on for our box.| Failure. For our demo, we instead had it turn on for 20 seconds, since it also helped with debugging, and making sure our sensors were actively responsive. However, we can easily make this a success by changing the delay. 
+| 13| Software shall handle user setting customization of location.| Utilizing manual input, we allow for the user to select location in order to get accurate weather and time data. | Success, we made it automatic, based on the IP address once connected to the wifi. 
+
+#### 3.2 Hardware Requirements Specification (HRS) Results
 | **Requirement**            | **Criteria** | **Result** | **Status**    |
 |----------           |--------- |--------|----------- |
 | 1| Project powered using wall outlet converter supplying 5 VDC, measured by O-scope; No other sources of power| ~5.1 V measured, only power source | Passed|
 | 2| Electronics housed in watertight 3D-printed shell| Final build was cardboard box | Failed|
 | 3|  | |
-| 4| | |
-| 5| | |
-| 6| | |
-| 7| | |
-| 8| | |
-| 9| | |
-| 10| | |
-| 11| | |
-| 12| | |
-| 13| | |
-
-#### 3.2 Hardware Requirements Specification (HRS) Results
-
-| **Requirement**            | **Criteria** | **Status**    |
-|----------           |--------- |------------------- |
-| 1| | |
-| 2| | |
-| 3| | |
 | 4| | |
 | 5| | |
 | 6| | |
