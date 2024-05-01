@@ -249,13 +249,25 @@ In a final product, we might consider improvements like only activating the LCD 
 
 ### LCD SPI Library
 
+We use the graphics library for the Adafruit TFT LCD provided in Lab 4. Communication with this device is performed through SPI (Serial Peripheral Interface). We only setup a one-directional communication from the ATmega328PB controller to the LCD peripheral, which occurs through the MOSI pin of the LCD peripheral. The SCK pin is a synchronous clock between the two devices which is supplied by the PB5 pin. This is the clock used to time the information transmission between the two devices. Due to the shared clock, the error in transmission can be reduced greatly as the reading and writing can be synchronized with the clock, which can be very fast. Then, there is a CS pin that can allow the ATmega328PB to use the same output to communicate with multiple peripherals. This SPI setup allows for the sending of commands and data in the library, which can be used to set addresses in the LCD corresponding to the individual pixels and send the colors that will fill the addresses.
+
 We read through the documentation (https://www.espressif.com/en/products/socs/esp32) and examples for the ESP32 and Arduino provided by in the Arduino IDE, which we used to program the Feather. 
 
 ### ESP32 Feather WiFi Library
+This library abstracts the connection process between the Feather and a WiFi router, giving the device access to the web upon successful connection. WiFi uses radio waves at mainly two different frequencies (2.4 GHz and 5 GHz) in order to transmit information wirelessly. WiFi routers are able to transmit information between devices by managing connections to multiple devices. Our aim is to connect to a router with access to the Internet so that we can access various web APIs.
 
+The base of this library is the WiFi variable. We can first use the library to scan for nearby networks (WiFi.scanNetworks()), which then gives a list of service set identifiers (SSIDs) and the number of networks found. Then, we can select one of these to connect to using WiFi.begin(SSID, PASSWORD) and WiFi.status() gives us our connection status. After this, we are able to use the HTTPClient library to send requests to the web.
 
-### ESP32 Feather HTTP Library
-This library allows us to make arbitrary HTTP requests for web resources once we are connected to a WiFi network. 
+Our device currently only supports WPA-based authentication, which requires a password to be provided to the network we select to connect.
+
+### ESP32 Feather HTTPClient Library
+This library allows us to make arbitrary HTTP requests for web resources once we are connected to a WiFi network. HTTP (Hypertext Transfer Protocol) is an Internet communication protocol that centers around documents containing hyperlinks to other documents which can also be requested. These documents/messages are then sent in packets over wireless communication as dictated by the TCP/IP protocol, which depends on the network layer to access different parts of the web. This depends on the data link layer between devices. 
+
+HTTP offers a variety of ways to change and access data from web resources. The types of requests include GET, POST, PUT, etc. These tell the server what the client is trying to access. We use get requests to access 3rd party API resources to get the information we need.
+
+The center library of this is the HTTPClient object, which is a wrapper that allows the device to easily send HTTP requests of any kind. We use it to send GET requests. In order to get a resource, we must specify its location using a URL (provided in the form of a string to our HTTPClient via http.begin()), the site of which is interpreted by DNS to find the IP of the server where the resource is located. we then send the get request with http.get(). We then take the response and make sure that it is okay by checking the status code returned, which tells us about whether or not we were successful. After, we parse the payload for the information we need.
+
+The HTTPClient library depends on the WiFiClient library, which in turn depends on the WiFi connection established by the WiFi library function calls.
 
 ### ESP32 Feather String Library
 This is a class that abstracts the character arrays used to store strings in C. This class deals with String objects, which have utility methods that allow for simpler code for comparisons, getting specific characters or chunks of the Strings, and 
@@ -264,3 +276,12 @@ This is a class that abstracts the character arrays used to store strings in C. 
 This is a class that abstracts the UART Serial interface in the ESP32. The underlying hardware is exactly the same, with a receive pin and a transmit pin for both directions of communication. Serial2 in the code refers to the hardware serial, which is initialized to the pins defined. Serial2 takes some time to set up, so we wait for it. Then, Serial2 can be used to send data through the UART connection using the print and println commands, which send individual bytes of data through the transmit line. We can also read from the receiver line, which uses a FIFO queue to buffer the inputs received. Serial2.available() checks if there is some data to read, and Serial2.read() reads one byte of data (hanging until a byte becomes available), enough to encode a character (we make use of this to send requests encoded as characters). Serial2.readBytesUntil() is also used since we can send C-strings back from the ATmega328PB with the null terminator which is the stopping point for the read. 
 
 ### Documentation Used
+https://ww1.microchip.com/downloads/en/DeviceDoc/40001906A.pdf
+
+https://www.espressif.com/en/products/socs/esp32
+
+https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor
+
+https://www.adafruit.com/product/3910
+
+https://www.arduino.cc/reference/en/
