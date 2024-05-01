@@ -225,17 +225,25 @@ Our final implementation involved 2 separate systems powered by the same 5 VDC s
 Reflect on your project. Some questions to consider: What did you learn from it? What went well? What accomplishments are you proud of? What did you learn/gain from this experience? Did you have to change your approach? What could have been done differently? Did you encounter obstacles that you didn’t anticipate? What could be a next step for this project?
 
 #### Successes
+Our f
 
 #### Shortcomings
+The internals of the project could have used improvement in both design and implementation. For one, we likely could have used one ATmega328PB to handle both the connections to the peripheral sensors/actuators as well as the WiFi and display components. Not doing this meant we needed to accomodate extra room for both microcontrollers and power them in a less uniform manner. This ultimately resulted in disorganized internal wiring that was difficult to fit inside the housing.
+
+In terms of the overall build quality, the project suffered due to scheduling issues and time pressure. We didn't understand the time constraints requirements of our 3D printing job. By the time we were finished with our design, we had assumed that we would be able to get it printed within a day or two. However, the size (which probably would have been reduced had we used one less microcontroller) meant that we couldn't print our design at RPL, and Education Commons was closed that week for Penn Relays, which left us with to Tangen Hall where the queues were too long for us to make the project deadline. Due to these issues, we ultimately decided to go with a cardboard box to contain the electronics, which would not meet our waterproofing specifications for the final design but would allow us to gather our electronics and at least present a self-contained device.
+
+In the circuit implementations, we did finalize some connections by sautering wires to a perfboard, but overall the organization could have been much cleaner and more compact. We also had some issues with common grounding that caused some debugging pains. We also could have picked more applicable sensors 
+
+
 
 #### Lessons Learned
 
 #### Next Steps
-Next steps for this project would involve meeting the unmet hardware and software requirements relevant to the project goals. This would mean re-assembling the project in the 3D printed shell and moving the code in the ATmega328PBs into a single microcontroller for space efficiency. We would then waterproof the device so that it can be used in a standard bathroom setting with extremely low risk. 
+Next steps for this project would involve meeting the unmet hardware and software requirements relevant to the project goals. This would mean re-assembling the project in the 3D printed shell and moving the code in the ATmega328PBs into a single microcontroller for space efficiency. We would then waterproof the device so that it can be used in a standard bathroom setting with extremely low risk. We might also want to switch out the photoresistor-LED pair for hand detection with another form of motion detection, like a small ultrasonic sensor or a PIR motion detector like the nightlight. This could reduce long-term power consumption.
 
 Some additional considerations that we could consider involve the considerations about the consumer experience using the device. For example, we could look to use the ATmega328PB to turn off the WiFi module when it is not being used, storing login details entirely in memory and rebooting the module only when a refresh is needed. This would make the device more suited for its role with lower power consumption. The user interface could also be improved, with the configuration tools being in a less visible spot for a cleaner design and the interface being redesigned to have larger text and more intuitive instructions.
 
-In a final product, we might consider improvements like only activating the LCD when motion is detected and reducing the size further.
+In a final product, we might consider improvements like only activating the LCD when motion is detected and reducing the size further, as well as improving the efficiency of requests on the WiFi side by reducing dependence on various APIs.
 
 ## References
 
